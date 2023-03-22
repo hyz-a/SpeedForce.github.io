@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://img.songhn.com/img/Y67gdd.png">
-  <title>归档</title>
+  <title>vue页面嵌入iframe,iframe页面接口请求不到</title>
   
     
       <meta 
         property="og:title" 
-        content="归档">
+        content="vue页面嵌入iframe,iframe页面接口请求不到">
     
     
       <meta 
         property="og:url" 
-        content="http://example.com/archives/index.html">
+        content="http://example.com/2023/03/22/vue%E9%A1%B5%E9%9D%A2%E5%B5%8C%E5%85%A5iframe-iframe%E9%A1%B5%E9%9D%A2%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E4%B8%8D%E5%88%B0/index.html">
     
     
       <meta 
@@ -36,6 +36,22 @@
         content="/img/head.jpg">
     
     
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2023-03-22">
+      <meta 
+        property="og:article:modified_time" 
+        content="2023-03-22">
+      <meta 
+        property="og:article:author" 
+        content="HYZ">
+      
+        
+      
     
   
   
@@ -52,6 +68,8 @@
   <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
   
   
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
   
   <script>
     function loadScript(url, cb) {
@@ -293,6 +311,18 @@
                <div class="sticky-tablet">
   
   
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%EF%BC%9A-vue%E9%A1%B9%E7%9B%AE%E4%B8%8B%E5%B5%8C%E5%85%A5iframe%E9%A1%B5%E9%9D%A2"><span class="toc-text">前提： vue项目下嵌入iframe页面</span></a></li></ol>
+      </div>
+    </article>
+  
   
   <article class="card card-content categories-widget">
     <div class="categories-card">
@@ -323,111 +353,88 @@
   </article>
   
   
-    <article class="card card-content widescreen-archive archive-widget">
-      <div class="archive-card">
-  <div class="archive-card-header">
-    <i 
-      class="iconfont icon-wodebaobiao" 
-      style="padding-right: 2px;">
-    </i>归档
-  </div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a 
-        href="/archives/2023" 
-        class="archive-card-list-item">
-        2023
-        <span class="archive-card-list-item-badge">3</span>
-      </a>
-    
-  </div>
-</div>
-    </article>
-  
 </div>
             </aside>
             <main class="main-column">
               
-<div class="card card-content">
-  <h1 class="widget-title">归档</h1>
-</div>
-<div class="archive-timeline">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      vue页面嵌入iframe,iframe页面接口请求不到
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2023-03-22T15:02:07.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2023-03-22</span>
+    </time>
+    
+    
+      <span class="dot"></span>
+      <span>166 字</span>
+    
+  </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <h1 id="前提：-vue项目下嵌入iframe页面"><a href="#前提：-vue项目下嵌入iframe页面" class="headerlink" title="前提： vue项目下嵌入iframe页面"></a>前提： vue项目下嵌入iframe页面</h1><p><strong>问题</strong>： vue项目是https，嵌入iframe页面的src也是https，但是<em>iframe页面里的请求是http</em>，发送请求报错 <u>Mixed Content: The page at ‘<a target="_blank" rel="noopener" href="https://xxxxxx&/#39;">https://xxxxxx&#39;</a> was loaded over HTTPS, but requested an insecure form action ‘<a target="_blank" rel="noopener" href="http://fxxxxxxx&/#39;">http://fxxxxxxx&#39;</a>. This request has been blocked; the content must be served over HTTPS.</u><br>意思大概就是https协议下的请求中有http请求 导致混合请求浏览器不允许。<br>解决方法：<br>https降级成http // 否掉 业务上指定不允许<br>vue里的pubilc中加入 // 没测试，不知道行不行<br>修改nginx代理请求 </p>
+<p>增加<code>add_header Content-Security-Policy &quot;upgrade-insecure-requests&quot;</code></p>
+<p> 将http协议升级为https // 已经实现。可行</p>
+
+  </div>
+  <div>
+    
+  </div>
+</article>
+<div class="nav">
   
   
-    
-      <div class="archive-timeline-tag"><span>2023</span></div>
-      
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2023-03-22</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2023/03/22/vue%E9%A1%B5%E9%9D%A2%E5%B5%8C%E5%85%A5iframe-iframe%E9%A1%B5%E9%9D%A2%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E4%B8%8D%E5%88%B0/"
-              class="archive-timeline-post-item">
-              vue页面嵌入iframe,iframe页面接口请求不到
-            </a>
-          </div>
+    <div class="nav-item-next">
+      <a 
+        href="/2023/03/15/async-await%E5%9C%A8for%E5%BE%AA%E7%8E%AF%E4%B8%AD%E4%BD%BF%E7%94%A8/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">async/await在for循环中使用 </div>
+          
         </div>
-      </div>
-    </div>
-  
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2023-03-15</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2023/03/15/async-await%E5%9C%A8for%E5%BE%AA%E7%8E%AF%E4%B8%AD%E4%BD%BF%E7%94%A8/"
-              class="archive-timeline-post-item">
-              async/await在for循环中使用
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2023-03-07</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2023/03/07/hello-world/"
-              class="archive-timeline-post-item">
-              Hello World
-            </a>
-          </div>
-        </div>
-      </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
     </div>
   
 </div>
 
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%EF%BC%9A-vue%E9%A1%B9%E7%9B%AE%E4%B8%8B%E5%B5%8C%E5%85%A5iframe%E9%A1%B5%E9%9D%A2"><span class="toc-text">前提： vue项目下嵌入iframe页面</span></a></li></ol>
+</div>
             </main>
             <aside class="right-column">
               <div class="sticky-widescreen">
   
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%EF%BC%9A-vue%E9%A1%B9%E7%9B%AE%E4%B8%8B%E5%B5%8C%E5%85%A5iframe%E9%A1%B5%E9%9D%A2"><span class="toc-text">前提： vue项目下嵌入iframe页面</span></a></li></ol>
+    </article>
   
   
   <article class="card card-content">
@@ -459,44 +466,6 @@
 </div>
   </article>
   
-  
-    <article class="card card-content">
-      <div class="archive-card">
-  <div class="archive-card-header">
-    <i 
-      class="iconfont icon-wodebaobiao" 
-      style="padding-right: 2px;">
-    </i>归档
-  </div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a 
-        href="/archives/2023" 
-        class="archive-card-list-item">
-        2023
-        <span class="archive-card-list-item-badge">3</span>
-      </a>
-    
-  </div>
-</div>
-    </article>
   
 </div>
             </aside>
@@ -599,6 +568,36 @@
 </a> 
      
      
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
      
      
     <script src="/js/main.js"></script> 
