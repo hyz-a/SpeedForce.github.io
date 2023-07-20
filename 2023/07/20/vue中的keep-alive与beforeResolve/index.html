@@ -319,7 +319,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue%E2%80%94element-admin-%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E6%A8%A1%E6%9D%BF%E4%B8%ADkeep-alive%E7%BC%93%E5%AD%98%E7%BB%84%E4%BB%B6"><span class="toc-text">Vue—element-admin 后台管理模板中keep-alive缓存组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E8%AE%B2%E4%B8%8Bkeep-alive%E7%9A%84%E4%BD%BF%E7%94%A8%E5%90%A7"><span class="toc-text">简单讲下keep-alive的使用吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#beforeResolve-%E4%B8%8E-beforeEach"><span class="toc-text">beforeResolve 与 beforeEach</span></a></li></ol>
       </div>
     </article>
   
@@ -374,7 +374,7 @@
     
     
       <span class="dot"></span>
-      <span>0 字</span>
+      <span>549 字</span>
     
   </div>
   
@@ -382,7 +382,16 @@
   <div 
     id="section" 
     class="post-content">
-    
+    <p>好久没写文章了，主要是准备软考+工作比较忙。也没有什么新技术心得。<br>今天正好遇见了一个问题，工作时候除了处理其他问题都在研究这个问题。</p>
+<h2 id="Vue—element-admin-后台管理模板中keep-alive缓存组件"><a href="#Vue—element-admin-后台管理模板中keep-alive缓存组件" class="headerlink" title="Vue—element-admin 后台管理模板中keep-alive缓存组件"></a>Vue—element-admin 后台管理模板中keep-alive缓存组件</h2><p>情况是这样的，菜单基本上都是动态路由，通过接口返回然后处理路由。因为涉及多级菜单，目前最深有四层！！！<br>用<code>keep-alive</code>来缓存组件，减少dom渲染，优化页面性能。</p>
+<h2 id="简单讲下keep-alive的使用吧"><a href="#简单讲下keep-alive的使用吧" class="headerlink" title="简单讲下keep-alive的使用吧"></a>简单讲下keep-alive的使用吧</h2><p>用<code>keep-alive</code>包裹<code>roter-view</code></p>
+<pre class="highlight"><span class="line">&lt;keep-alive&gt;</span><br><span class="line">   <span class="language-xml"><span class="tag">&lt;<span class="name">router-view</span> <span class="attr">:key</span>=<span class="string">key</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span></span><br><span class="line">&lt;/keep-alive&gt;</span><br></pre>
+<p><code>keep-alive</code> 有下面三个属性<br>include - 字符串或正则表达式。只有名称匹配的组件会被缓存。<br>exclude - 字符串或正则表达式。任何名称匹配的组件都不会被缓存。<br>max - 数字。最多可以缓存多少组件实例。<br>还有生命周期的钩子函数<code>activated 和 deactivated</code>只会在<code>keep-alive</code>包裹的组件中触发。<br>具体的看<a target="_blank" rel="noopener" href="https://v2.cn.vuejs.org/v2/api/#keep-alive">官方文档</a>吧 </p>
+<p>目前已经实现了缓存但是，没有实现消除缓存页面的功能。<br>如果要实现消除缓存页面的功能就要给<code>keep-alive</code>添加<code>include</code>，因为涉及的层数太多，且<code>keep-alive</code>只会缓存二级路由不会，再深的路由层级是不会缓存的。<br>方案1、直接将路由扁平化配置，都放在一级或二级路由中<br>方案2、再一层缓存组件用来过渡，并将其name配置到include中<br>网上有很多文章可以看。这里就不写了。我觉得都比较麻烦。<br>多方思考，我找到了一个比较方便的方法</p>
+<pre class="highlight"><span class="line">router.<span class="title function_">beforeResolve</span>(<span class="function">(<span class="params">to,<span class="keyword">from</span>,next</span>)=&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(to.<span class="property">matched</span> &amp;&amp; to.<span class="property">matched</span>.<span class="property">length</span> &gt; <span class="number">2</span>) to.<span class="property">matched</span>.<span class="title function_">splice</span>(<span class="number">1</span>,to.<span class="property">matched</span>.<span class="property">length</span>-<span class="number">2</span>)</span><br><span class="line">  <span class="title function_">next</span>()</span><br><span class="line">&#125;)</span><br></pre>
+
+<h2 id="beforeResolve-与-beforeEach"><a href="#beforeResolve-与-beforeEach" class="headerlink" title="beforeResolve 与 beforeEach"></a>beforeResolve 与 beforeEach</h2><p>你可以用 router.beforeResolve 注册一个全局守卫。这和 router.beforeEach 类似，因为它在每次导航时都会触发，不同的是，解析守卫刚好会在导航被确认之前、所有组件内守卫和异步路由组件被解析之后调用</p>
+
   </div>
   <div>
     
@@ -416,7 +425,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue%E2%80%94element-admin-%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E6%A8%A1%E6%9D%BF%E4%B8%ADkeep-alive%E7%BC%93%E5%AD%98%E7%BB%84%E4%BB%B6"><span class="toc-text">Vue—element-admin 后台管理模板中keep-alive缓存组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E8%AE%B2%E4%B8%8Bkeep-alive%E7%9A%84%E4%BD%BF%E7%94%A8%E5%90%A7"><span class="toc-text">简单讲下keep-alive的使用吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#beforeResolve-%E4%B8%8E-beforeEach"><span class="toc-text">beforeResolve 与 beforeEach</span></a></li></ol>
 </div>
             </main>
             <aside class="right-column">
@@ -430,7 +439,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue%E2%80%94element-admin-%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E6%A8%A1%E6%9D%BF%E4%B8%ADkeep-alive%E7%BC%93%E5%AD%98%E7%BB%84%E4%BB%B6"><span class="toc-text">Vue—element-admin 后台管理模板中keep-alive缓存组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E8%AE%B2%E4%B8%8Bkeep-alive%E7%9A%84%E4%BD%BF%E7%94%A8%E5%90%A7"><span class="toc-text">简单讲下keep-alive的使用吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#beforeResolve-%E4%B8%8E-beforeEach"><span class="toc-text">beforeResolve 与 beforeEach</span></a></li></ol>
     </article>
   
   
